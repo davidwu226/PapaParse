@@ -1240,6 +1240,21 @@
 			var nextNewline = input.indexOf(newline, cursor);
 			var quoteCharRegex = new RegExp(quoteChar+quoteChar, 'g');
 
+			/** Checks if the current input position is an escape. */
+			function isEscaped(input, idx, escapeChar)
+			{
+				if (input[idx] === escapeChar) {
+					// We need to make sure the escaped character isn't itself escaped.
+					let escapeEscaped = false
+					while (--idx && input[idx] === escapeChar) {
+						escapeEscaped = !escapeEscaped
+					}
+					return !escapeEscaped
+				}
+
+				return false
+			}
+
 			// Parser loop
 			for (;;)
 			{
@@ -1288,8 +1303,9 @@
 						}
 
 						// If this quote is preceded by an escape character, it's part of the data, skip it
-						if (input[quoteSearch-1] === escapeChar)
+						if (input[quoteSearch-1] === escapeChar && isEscaped(input, quoteSearch-1, escapeChar))
 						{
+							if
 							quoteSearch++;
 							continue;
 						}
