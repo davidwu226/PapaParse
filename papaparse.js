@@ -1295,15 +1295,14 @@
 							return finish(value);
 						}
 
-						// If this quote is escaped, it's part of the data; skip it
-						if (input[quoteSearch+1] === quoteChar)
+						// If this quote is preceded by an escape character, it's part of the data, skip it
+						if (input[quoteSearch-1] === escapeChar && isEscaped(input, quoteSearch-1, escapeChar))
 						{
-							quoteSearch++;
 							continue;
 						}
 
-						// If this quote is preceded by an escape character, it's part of the data, skip it
-						if (input[quoteSearch-1] === escapeChar && isEscaped(input, quoteSearch-1, escapeChar))
+						// If this quote is escaped, it's part of the data; skip it
+						if (input[quoteSearch+1] === quoteChar)
 						{
 							quoteSearch++;
 							continue;
