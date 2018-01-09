@@ -1245,9 +1245,9 @@
 			{
 				if (input[idx] === escapeChar) {
 					// We need to make sure the escaped character isn't itself escaped.
-					let unpairedEscaped = true
+					let unpairedEscape = true
 					while (--idx && input[idx] === escapeChar) {
-						unpairedEscaped = !unpairedEscaped
+						unpairedEscape = !unpairedEscape
 					}
 					return unpairedEscape
 				}
