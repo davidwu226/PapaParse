@@ -1245,11 +1245,11 @@
 			{
 				if (input[idx] === escapeChar) {
 					// We need to make sure the escaped character isn't itself escaped.
-					let escapeEscaped = false
+					let unpairedEscaped = true
 					while (--idx && input[idx] === escapeChar) {
-						escapeEscaped = !escapeEscaped
+						unpairedEscaped = !unpairedEscaped
 					}
-					return !escapeEscaped
+					return unpairedEscape
 				}
 
 				return false
@@ -1296,7 +1296,7 @@
 						}
 
 						// If this quote is preceded by an escape character, it's part of the data, skip it
-						if (input[quoteSearch-1] === escapeChar && isEscaped(input, quoteSearch-1, escapeChar))
+						if (isEscaped(input, quoteSearch-1, escapeChar))
 						{
 							continue;
 						}
