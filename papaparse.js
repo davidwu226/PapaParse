@@ -1305,7 +1305,6 @@
 						// If this quote is preceded by an escape character, it's part of the data, skip it
 						if (input[quoteSearch-1] === escapeChar && isEscaped(input, quoteSearch-1, escapeChar))
 						{
-							if
 							quoteSearch++;
 							continue;
 						}
