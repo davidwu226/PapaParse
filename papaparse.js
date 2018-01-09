@@ -1152,6 +1152,8 @@
 		var step = config.step;
 		var preview = config.preview;
 		var fastMode = config.fastMode;
+		var escapeChar = config.escapeChar;
+
 		/** Allows for no quoteChar by setting quoteChar to undefined in config */
 		if (config.quoteChar === undefined){
 			var quoteChar = '"';
@@ -1280,6 +1282,13 @@
 
 						// If this quote is escaped, it's part of the data; skip it
 						if (input[quoteSearch+1] === quoteChar)
+						{
+							quoteSearch++;
+							continue;
+						}
+
+						// If this quote is preceded by an escape character, it's part of the data, skip it
+						if (input[quoteSearch-1] === escapeChar)
 						{
 							quoteSearch++;
 							continue;
